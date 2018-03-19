@@ -20,4 +20,4 @@ yarn-error.log*
 *.sln
 
 # Config files
-/src/config/
+src/config/
