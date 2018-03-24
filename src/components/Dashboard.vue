@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <h4>Dashboard</h4>
+    <div class="collection">
+      <a href="#" class="collection-item" v-for="project in projects" :key="project.id">{{project.jobNumber}}</a>
+    </div>
   </div>
 </template>
 
