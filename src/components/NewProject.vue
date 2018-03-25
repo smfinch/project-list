@@ -4,7 +4,7 @@
     <div class="row">
       <form @submit.prevent="saveProject" class="col s12">
         <div class="row">
-          <div class="input-field col s1">
+          <div class="input-field col s2">
             <input type="text" v-model="jobNumber" required>
             <label>Project #</label>
           </div>
@@ -12,12 +12,30 @@
             <input type="text" v-model="customer" required>
             <label>Customer</label>
           </div>
-          <div class="input-field col s9">
+          <div class="input-field col s8">
             <input type="text" v-model="description" required>
             <label>Description</label>
           </div>
         </div>
-        <button type="submit" class="btn">Create New Project</button>
+        <div class="row">
+          <div class="input-field col s3">
+            <input type="text" v-model="eng" required>
+            <label>Designer</label>
+          </div>
+          <div class="input-field col s3">
+            <input type="text" v-model="mech" required>
+            <label>Technician</label>
+          </div>
+          <div class="input-field col s3">
+            <input type="text" class="datepicker" v-model="shipDate" required>
+            <label>Ship Date</label>
+          </div>
+          <div class="input-field col s3">
+            <input type="text" v-model="status" required>
+            <label>Status</label>
+          </div> 
+        </div>
+        <button type="submit" class="btn blue-grey darken-2">Create New Project</button>
         <router-link to="/" class="btn grey right">Cancel</router-link>
       </form>
     </div>
@@ -37,10 +55,6 @@
         eng: null,
         mech: null,
         status: null,
-        location: {
-          city: null,
-          state: null,
-        },
         shipDate: null
       }
     },
@@ -49,16 +63,28 @@
         db.collection('jobs').add({
           jobNumber: this.jobNumber,
           customer: this.customer,
-          description: this.description
+          description: this.description,
+          status: this.status,
+          eng: this.eng,
+          mech: this.mech,
+          shipDate: this.shipDate
         })
         .then(docRef => {
-          console.log('Project added: ', docRef.Id)
+          console.log('Project added: ', docRef.id)
           this.$router.push('/')
         })
         .catch(error => {
           console.error('Error adding project: ', error)
         })
+      },
+      datePickerInit () {
+        $(document).ready(function(){
+          $('.datepicker').datepicker();
+        });
       }
+    },
+    beforeMount() {
+      this.datePickerInit()
     }
   }
 </script>

@@ -1,9 +1,24 @@
 <template>
   <div class="container">
     <h4>Dashboard</h4>
-    <div class="collection">
-      <a href="#" class="collection-item" v-for="project in projects" :key="project.id">{{project.jobNumber}}</a>
-    </div>
+    <table class="highlight">
+      <thead>
+        <tr>
+          <th>Job Number</th>
+          <th>Customer</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="project in projects" :key="project.id">
+          <td>{{project.jobNumber}}</td>
+          <td>{{project.customer}}</td>
+          <td>{{project.description}}</td>
+          <td>{{project.status}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -27,7 +42,6 @@
             'eng': doc.data().eng,
             'mech': doc.data().mech,
             'status': doc.data().status,
-            'location': doc.data().location,
             'shipDate': doc.data().shipDate,
           }
           this.projects.push(data)
